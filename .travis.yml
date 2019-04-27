@@ -10,3 +10,11 @@ script:
 
 after_success:
   - docker build -t rwalerow/multi-client ./client
+  - docker build -t rwalerow/multi-nginx ./nginx
+  - docker build -t rwalerow/multi-server ./server
+  - docker build -t rwalerow/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - docker push rwalerow/multi-client
+  - docker push rwalerow/multi-nginx
+  - docker push rwalerow/multi-server
+  - docker push rwalerow/multi-worker
