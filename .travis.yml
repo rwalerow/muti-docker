@@ -18,3 +18,18 @@ after_success:
   - docker push rwalerow/multi-nginx
   - docker push rwalerow/multi-server
   - docker push rwalerow/multi-worker
+
+deploy:
+  provider: elasticbeanstack
+  region: us-west-1
+  app: multi-docker
+  env: Multidocker-env
+  bucket_name: elasticbeanstack-us-west-1-24231424323
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
+  
